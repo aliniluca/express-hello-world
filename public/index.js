@@ -20,13 +20,6 @@ window.onload = function() {
       console.error('Could not copy text: ', err);
     });
   });
-  // Add 30 buttons
-  for (let i = 1; i <= 30; i++) {
-    const button = document.createElement('button');
-    button.textContent = i;
-    button.addEventListener('click', () => getFile(dropdown.value, i));
-    buttonContainer.appendChild(button);
-  }
 
   // Fetch a file from the server and update the textarea
   function getFile(readingType, number) {
