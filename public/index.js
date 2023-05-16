@@ -13,7 +13,7 @@ window.onload = function() {
 
   // Fetch a file from the server and update the textarea
   function getFile(readingType, number) {
-    fetch(`https://etsyreadings.cyclic.app/:3000/get-file?readingType=${readingType}&number=${number}`)
+    fetch(`https://etsyreadings.cyclic.app/get-file?readingType=${readingType}&number=${number}`)
       .then(response => response.text())
       .then(text => output.value = text)
       .catch(err => console.error(err));
