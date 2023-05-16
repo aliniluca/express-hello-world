@@ -1,11 +1,19 @@
 const express = require('express');
 const AWS = require('aws-sdk');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const s3 = new AWS.S3();
 
 app.use(cors());
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.get('/get-file', async (req, res) => {
   const { readingType, number } = req.query;
