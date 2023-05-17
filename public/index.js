@@ -43,21 +43,15 @@ window.onload = function() {
       .catch(err => console.error(err));
   }
   
-function editAndSaveFile(readingType, newText) {
+  function editAndSaveFile(readingType, number, newText) {
     fetch(`https://etsyreadings.cyclic.app/edit-and-save-file`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ readingType, newText }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ readingType, number, newText }),
     })
-    .then(response => {
-        if(response.ok) {
-            alert('File saved successfully');
-            return response.text();
-        } else {
-            throw new Error('Error saving the file');
-        }
-    })
+    .then(response => response.text())
     .catch(err => console.error(err));
-}
+  }
+};
