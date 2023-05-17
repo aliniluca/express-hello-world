@@ -3,7 +3,9 @@ window.onload = function() {
   const buttonContainer = document.getElementById('buttonContainer');
   const output = document.getElementById('output');
   const copyButton = document.getElementById('copyButton');
+const editAndSaveButton = document.getElementById('editAndSaveButton');
 
+  editAndSaveButton.addEventListener('click', () => editAndSaveFile(dropdown.value, output.value));
   // Add 30 buttons
   for (let i = 1; i <= 30; i++) {
     const button = document.createElement('button');
@@ -28,4 +30,16 @@ window.onload = function() {
       .then(text => output.value = text)
       .catch(err => console.error(err));
   }
+   function editAndSaveFile(readingType, newText) {
+    fetch(`https://etsyreadings.cyclic.app/edit-and-save-file`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ readingType, newText }),
+    })
+    .then(response => response.text())
+    .catch(err => console.error(err));
+  }
 };
+
