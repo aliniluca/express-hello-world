@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const AWS = require('aws-sdk');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -7,7 +8,10 @@ const app = express();
 const s3 = new AWS.S3();
 
 app.use(cors());
-app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.json());
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/get-file', async (req, res) => {
   const { readingType, number } = req.query;
@@ -37,7 +41,7 @@ app.post('/edit-and-save-file', async (req, res) => {
 
   try {
     await s3.putObject(params).promise();
-    res.send('File updated successfully');
+    res.send('File edited successfully');
   } catch (err) {
     console.error(err);
     res.status(500).send('An error occurred');
