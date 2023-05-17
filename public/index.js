@@ -52,6 +52,7 @@ window.onload = function() {
       body: JSON.stringify({ readingType, number, newText }),
     })
     .then(response => response.text())
+     alert('Text modified to the database');
     .catch(err => console.error(err));
   }
 };
